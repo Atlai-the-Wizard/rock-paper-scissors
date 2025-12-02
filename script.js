@@ -2,8 +2,6 @@ function clr() {
   console.clear();
 }
 
-// Have some of the console logs as alerts; the winner should be announced.
-
 alert("Check the console to start playing!");
 console.log("Type playGame() to start!");
 
@@ -12,6 +10,13 @@ let playerChoice;
 let gameRounds = 0;
 let computerWins = 0;
 let playerWins = 0;
+
+// play the game
+function playGame() {
+  getPlayerChoice()
+  getComputerChoice()
+  compareChoices()
+}
 
 // let the computer choose a weapon
 function getComputerChoice() {
@@ -40,8 +45,8 @@ function getPlayerChoice() {
     console.log("So, paper is your weapon of choice, huh?");
     return(playerChoice = "paper");
   } else if (playerChoice.toLowerCase() == "scissors") {
-    return(playerChoice = "scissors");
     console.log("I see you are a scissors enjoyer as well.");
+    return(playerChoice = "scissors");
   } else {
     alert("Please choose either rock, paper, or scissors.")
     return(getPlayerChoice());
@@ -50,43 +55,17 @@ function getPlayerChoice() {
 
 // compare the choices
 function compareChoices() {
-  if (playerChoice == "rock" && computerChoice == "rock") {
-  console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: it's a tie!`);
-  return(increaseTie());
-  } else if (playerChoice == "rock" && computerChoice == "paper") {
-  console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you lose!`);
-  return(increaseComputerWins());
-  } else if (playerChoice == "rock" && computerChoice == "scissors") {
-  console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you win!`);
-  return(increasePlayerWins());
-  } else if (playerChoice == "paper" && computerChoice == "rock") {
-  console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you win!`);
-  return(increasePlayerWins());
-  } else if (playerChoice == "paper" && computerChoice == "paper") {
-  console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: it's a tie!`);
-  return(increaseTie());
-  } else if (playerChoice == "paper" && computerChoice == "scissors") {
-  console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you lose!`);
-  return(increaseComputerWins());
-  } else if (playerChoice == "scissors" && computerChoice == "rock") {
-  console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you lose!`);
-  return(increaseComputerWins());
-  } else if (playerChoice == "scissors" && computerChoice == "paper") {
-  console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you win!`);
-  return(increasePlayerWins());
-  } else if (playerChoice == "scissors" && computerChoice == "scissors") {
-  console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: it's a tie!`);
-  return(increaseTie());
+  if (playerChoice == "rock" && computerChoice == "rock" || playerChoice == "paper" && computerChoice == "paper" || playerChoice == "scissors" && computerChoice == "scissors") {
+    alert(`You chose ${playerChoice} and the computer chose ${computerChoice}: it's a tie!`);
+    return(increaseTie());
+  } else if (playerChoice == "rock" && computerChoice == "paper" || playerChoice == "paper" && computerChoice == "scissors" || playerChoice == "scissors" && computerChoice == "rock") {
+    alert(`You chose ${playerChoice} and the computer chose ${computerChoice}: you lose!`);
+    return(increaseComputerWins());
+  } else if (playerChoice == "rock" && computerChoice == "scissors" || playerChoice == "paper" && computerChoice == "rock" || playerChoice == "scissors" && computerChoice == "paper") {
+    alert(`You chose ${playerChoice} and the computer chose ${computerChoice}: you win!`);
+    return(increasePlayerWins());
   }
 }
-
-// play the game
-function playGame() {
-  getPlayerChoice()
-  getComputerChoice()
-  compareChoices()
-}
-
 // functions for round and wins tracking
 function increasePlayerWins() {
   ++playerWins;
@@ -106,7 +85,7 @@ function increaseComputerWins() {
 
 function increaseTie() {
   ++gameRounds;
-  console.log("" + gameRounds);
+  console.log("Rounds played: " + gameRounds);
   return(roundTracker());
 }
 
@@ -143,10 +122,44 @@ function playAgain() {
   }
 }
 
+// Notes and older code; left as reference.
+
 // track total wins over time?
 
 // How to make the game track winner? Maybe have a declaration set wins to 0, and then when either side wins temporarily set it to 1. Then at the start of a new game set it back to 0
 
 // make functions for tracking wins, computer wins, and number of rounds.
+
+// // compare the choices - outdated; leaving for future reference.
+// function compareChoices() {
+//   if (playerChoice == "rock" && computerChoice == "rock") {
+//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: it's a tie!`);
+//   return(increaseTie());
+//   } else if (playerChoice == "rock" && computerChoice == "paper") {
+//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you lose!`);
+//   return(increaseComputerWins());
+//   } else if (playerChoice == "rock" && computerChoice == "scissors") {
+//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you win!`);
+//   return(increasePlayerWins());
+//   } else if (playerChoice == "paper" && computerChoice == "rock") {
+//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you win!`);
+//   return(increasePlayerWins());
+//   } else if (playerChoice == "paper" && computerChoice == "paper") {
+//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: it's a tie!`);
+//   return(increaseTie());
+//   } else if (playerChoice == "paper" && computerChoice == "scissors") {
+//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you lose!`);
+//   return(increaseComputerWins());
+//   } else if (playerChoice == "scissors" && computerChoice == "rock") {
+//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you lose!`);
+//   return(increaseComputerWins());
+//   } else if (playerChoice == "scissors" && computerChoice == "paper") {
+//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you win!`);
+//   return(increasePlayerWins());
+//   } else if (playerChoice == "scissors" && computerChoice == "scissors") {
+//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: it's a tie!`);
+//   return(increaseTie());
+//   }
+// }
 
 // make a tracker function that counts the rounds played, and when it reaches five compare the number of wins to the number of losses. If wins is more than losses, you win. If not, the computer wins. Could also make something that counts the total number of wins, and once those reach three, you automatically win or lose depending on who reaches three first. A function that checks the number of wins and rounds, then runs playGame() again.

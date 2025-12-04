@@ -69,24 +69,26 @@ function compareChoices() {
 // functions for round and wins tracking
 function increasePlayerWins() {
   ++playerWins;
-  ++gameRounds;
   console.log("Player wins: " + playerWins);
-  console.log("Rounds played: " + gameRounds);
+  increaseRounds();
   return(roundTracker());
 }
 
 function increaseComputerWins() {
   ++computerWins;
-  ++gameRounds;
   console.log("Computer wins: " + computerWins);
-  console.log("Rounds played: " + gameRounds);
+  increaseRounds();
   return(roundTracker());
 }
 
 function increaseTie() {
+  increaseRounds();
+  return(roundTracker());
+}
+
+function increaseRounds() {
   ++gameRounds;
   console.log("Rounds played: " + gameRounds);
-  return(roundTracker());
 }
 
 // round and wins checker
@@ -121,45 +123,3 @@ function playAgain() {
     return;
   }
 }
-
-// Notes and older code; left as reference.
-
-// track total wins over time?
-
-// How to make the game track winner? Maybe have a declaration set wins to 0, and then when either side wins temporarily set it to 1. Then at the start of a new game set it back to 0
-
-// make functions for tracking wins, computer wins, and number of rounds.
-
-// // compare the choices - outdated; leaving for future reference.
-// function compareChoices() {
-//   if (playerChoice == "rock" && computerChoice == "rock") {
-//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: it's a tie!`);
-//   return(increaseTie());
-//   } else if (playerChoice == "rock" && computerChoice == "paper") {
-//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you lose!`);
-//   return(increaseComputerWins());
-//   } else if (playerChoice == "rock" && computerChoice == "scissors") {
-//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you win!`);
-//   return(increasePlayerWins());
-//   } else if (playerChoice == "paper" && computerChoice == "rock") {
-//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you win!`);
-//   return(increasePlayerWins());
-//   } else if (playerChoice == "paper" && computerChoice == "paper") {
-//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: it's a tie!`);
-//   return(increaseTie());
-//   } else if (playerChoice == "paper" && computerChoice == "scissors") {
-//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you lose!`);
-//   return(increaseComputerWins());
-//   } else if (playerChoice == "scissors" && computerChoice == "rock") {
-//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you lose!`);
-//   return(increaseComputerWins());
-//   } else if (playerChoice == "scissors" && computerChoice == "paper") {
-//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: you win!`);
-//   return(increasePlayerWins());
-//   } else if (playerChoice == "scissors" && computerChoice == "scissors") {
-//   console.log(`You chose ${playerChoice} and the computer chose ${computerChoice}: it's a tie!`);
-//   return(increaseTie());
-//   }
-// }
-
-// make a tracker function that counts the rounds played, and when it reaches five compare the number of wins to the number of losses. If wins is more than losses, you win. If not, the computer wins. Could also make something that counts the total number of wins, and once those reach three, you automatically win or lose depending on who reaches three first. A function that checks the number of wins and rounds, then runs playGame() again.

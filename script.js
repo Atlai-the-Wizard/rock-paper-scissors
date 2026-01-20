@@ -2,8 +2,12 @@ function clr() {
   console.clear();
 }
 
-alert("Check the console to start playing!");
+// alert("Check the console to start playing!");
 console.log("Type playGame() to start!");
+
+// const btnRock = document.querySelector('.rock');
+// const btnPaper = document.querySelector('.paper');
+// const btnScissors = document.querySelector('.scissors');
 
 let computerChoice;
 let playerChoice;
